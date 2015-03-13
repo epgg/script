@@ -1,0 +1,10 @@
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_10k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849421_pilot10k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849421_10k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_10k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849422_deep10k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849422_10k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_20k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849421_pilot20k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849421_20k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_20k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849422_deep20k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849422_20k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_40k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849421_pilot40k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849421_40k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_40k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849422_deep40k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849422_40k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_80k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849421_pilot80k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849421_80k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_80k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849422_deep80k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849422_80k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_160k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849421_pilot160k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849421_160k
+python do.py /home/xzhou/data/dm3/GSE34453/GSM849421_160k_bins.txt /home/xzhou/data/dm3/GSE34453/GSM849422_deep160k_normalized.txt /home/xzhou/data/dm3/GSE34453/out/GSM849422_160k
