@@ -1,5 +1,5 @@
 import sys,os
-sys.path.append('/home/xzhou/subtleKnife/script/genescript')
+sys.path.append('/srv/epgg/data/subtleKnife/script/genescript')
 import parseUcscgenestruct
 
 if len(sys.argv)!=3:
