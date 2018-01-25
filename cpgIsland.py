@@ -12,8 +12,9 @@ def main():
             with open('cpgisland','w') as outfile:
                 for line in infile:
                     t = line.strip().split('\t')
-                    #outfile.write('{}\t{}\t{}\t.\t{}\n'.format(t[1], t[2], t[3], t[4].replace(': ','-')))
-                    outfile.write('{}\t{}\t{}\t.\t{}\n'.format(t[1], t[2], t[3], i))
+                    outfile.write('{}\t{}\t{}\t.\t{}\n'.format(t[1], t[2], t[3], t[4].replace(': ','-')))
+                    #outfile.write('{}\t{}\t{}\t.\t{}\n'.format(t[1], t[2], t[3], i))
+                    #outfile.write('{}\t{}\t{}\t.\t{}\n'.format(t[0], t[1], t[2], i))
                     i += 1
     except IOError,message:
         print >> sys.stderr, "cannot open file",message

@@ -1,8 +1,11 @@
-import sys
-sys.path.append('/home/xzhou/subtleKnife/script/genescript')
+import sys,gzip
+sys.path.append('/srv/epgg/data/subtleKnife/script/genescript')
 import parseUcscgenestruct
 
-tkname='gencodeV17'
+def xopen(f,mode='rb'):
+    return gzip.open(f,mode)
+
+tkname='gencodeV19'
 
 
 cateinfo={'coding':1,
@@ -16,17 +19,17 @@ cateinfo={'coding':1,
 genes={}
 # actually transcripts
 # key: transcript id, val: raw lst
-with open('wgEncodeGencodeCompV17.txt') as fin:
+with xopen('wgEncodeGencodeCompV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		genes[lst[1]]=lst
-with open('wgEncodeGencodePseudoGeneV17.txt') as fin:
+with xopen('wgEncodeGencodePseudoGeneV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		if lst[1] in genes:
 			print 'Overriding '+lst[1]
 		genes[lst[1]]=lst
-with open('wgEncodeGencode2wayConsPseudoV17.txt') as fin:
+with xopen('wgEncodeGencode2wayConsPseudoV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		if lst[1] in genes:
@@ -37,7 +40,7 @@ with open('wgEncodeGencode2wayConsPseudoV17.txt') as fin:
 
 remark={}
 # key: transcript id
-with open('wgEncodeGencodeAnnotationRemarkV17.txt') as fin:
+with xopen('wgEncodeGencodeAnnotationRemarkV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		if len(lst)<2: continue
@@ -45,7 +48,7 @@ with open('wgEncodeGencodeAnnotationRemarkV17.txt') as fin:
 
 
 uniprot={}
-with open('wgEncodeGencodeUniProtV17.txt') as fin:
+with xopen('wgEncodeGencodeUniProtV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		if lst[0] not in uniprot:
@@ -55,7 +58,7 @@ with open('wgEncodeGencodeUniProtV17.txt') as fin:
 
 
 pubmed={}
-with open('wgEncodeGencodePubMedV17.txt') as fin:
+with xopen('wgEncodeGencodePubMedV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		if lst[0] not in pubmed:
@@ -65,7 +68,7 @@ with open('wgEncodeGencodePubMedV17.txt') as fin:
 
 
 refseq={}
-with open('wgEncodeGencodeRefSeqV17.txt') as fin:
+with xopen('wgEncodeGencodeRefSeqV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		refseq[lst[0]]=[lst[1]]
@@ -74,7 +77,7 @@ with open('wgEncodeGencodeRefSeqV17.txt') as fin:
 
 
 desc={}
-with open('../kgXref.txt') as fin:
+with xopen('kgXref.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		if len(lst)>=8 and len(lst[7])>0:
@@ -95,7 +98,7 @@ fout2=open(tkname+'_load','w')
 
 id=1
 
-with open('wgEncodeGencodeAttrsV17.txt') as fin:
+with xopen('wgEncodeGencodeAttrsV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		transcript=lst[4]
@@ -180,7 +183,7 @@ fout2.close()
 
 
 # add polyA regions
-with open('wgEncodeGencodePolyaV17.txt') as fin:
+with xopen('wgEncodeGencodePolyaV19.txt.gz') as fin:
 	for line in fin:
 		lst=line.rstrip().split('\t')
 		fout.write('{0}\t{1}\t{2}\tcategory:5,strand:"{3}",id:{4}\n'.format(lst[2],lst[4],lst[5],lst[3],id))

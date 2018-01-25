@@ -4,8 +4,11 @@
 
 #gemome='danRer10'
 #genome='canFam3'
-genome='galGal4'
-oldgenome='danRer7'
+#genome='galGal4'
+#genome='rn6'
+#genome='ce10'
+genome='dm6'
+#oldgenome='danRer7'
 
 : <<'END'
 END
@@ -58,17 +61,17 @@ echo "chmod 777 /srv/epgg/data/data/subtleKnife/${genome}/session"
 echo "# both end"
 
 echo "#on test"
-# at /srv/epgg/data/dli/add_${genome}/config
+echo "# at /srv/epgg/data/dli/add_${genome}/config"
 echo "mkdir ~/eg/config/${genome}"
 echo "mv * ~/eg/config/${genome}/"
-# on public
-#cp /srv/epgg/data/subtleKnife/config/${oldgenome}/makeDb.sql .
-#cp /srv/epgg/data/subtleKnife/config/${oldgenome}/tracks.json .
+echo "# on public"
+echo "#cp /srv/epgg/data/subtleKnife/config/${oldgenome}/makeDb.sql ."
+echo "#cp /srv/epgg/data/subtleKnife/config/${oldgenome}/tracks.json ."
 echo "mysql -u hguser -phguser -e 'create database ${genome};'"
-# at /srv/epgg/data/dli/add_${genome}/config
+echo "# at /srv/epgg/data/dli/add_${genome}/config"
 echo "cat makeDb.sql | mysql -u hguser -phguser ${genome} --local-infile=1"
 echo "cat /srv/epgg/data/subtleKnife/config/sessionUtils.sql | mysql -u hguser -phguser ${genome} --local-infile=1"
-# at /srv/epgg/data/data/browserLoad/${genome}"
+echo "# at /srv/epgg/data/data/browserLoad/${genome}"
 echo "cat load.sql | mysql -u hguser -phguser ${genome} --local-infile=1"
 echo "ln -s /srv/epgg/data/data/subtleKnife/${genome}/ /var/www/d/"
 echo "scp ${genome}.gz* 10.200.0.12:/srv/epgg/data/data/subtleKnife/seq/"
@@ -77,12 +80,13 @@ echo "scp *.gz* 10.200.0.11:/srv/epgg/data/data/subtleKnife/${genome}/"
 echo "scp *.gz* 10.200.0.12:/srv/epgg/data/data/subtleKnife/${genome}/" # gene tbi files also need be locally
 echo "scp *.bigWig 10.200.0.11:/srv/epgg/data/data/subtleKnife/${genome}/"
 echo "scp rmsk/rmsk_all.gz* 10.200.0.11:/srv/epgg/data/data/subtleKnife/${genome}/"
-## for .8
-#mysql> GRANT ALL privileges ON galGal4.* TO 'hguser'@'%' IDENTIFIED BY 'hguser' WITH GRANT OPTION;
-#mysql> FLUSH PRIVILEGES;
-#makeDb.sql need change default location after 1st load, then reload
-#put tracks.json on genome/config
-## at pub
-#mkdir /srv/epgg/data/data/browserLoad/canFam3
-#mkdir /srv/epgg/data/data/browserLoad/galGal4
+echo "## for .8"
+echo "#mysql> GRANT ALL privileges ON galGal4.* TO 'hguser'@'%' IDENTIFIED BY 'hguser' WITH GRANT OPTION;"
+echo "#mysql> FLUSH PRIVILEGES;"
+echo "#makeDb.sql need change default location after 1st load, then reload"
+echo "#put tracks.json on genome/config"
+echo "## at pub"
+echo "#mkdir /srv/epgg/data/data/browserLoad/${genome}"
+#echo "#mkdir /srv/epgg/data/data/browserLoad/canFam3"
+#echo "#mkdir /srv/epgg/data/data/browserLoad/galGal4"
 

@@ -2,37 +2,34 @@ import sys,os
 sys.path.append('/srv/epgg/data/subtleKnife/script/genescript')
 import parseUcscgenestruct
 
-if len(sys.argv)!=3:
-    print '<ucsc gene file> <tkname>'
+if len(sys.argv) < 3:
+    print '<ensGene.txt file> <tkname> knownToEnsembl.txt and kgXref.txt optionally be under current dir'
     sys.exit()
 
-ucsc,tkname=sys.argv[1:]
 
+aa={}
+if os.path.exists('knownToEnsembl.txt'):
+    with open('knownToEnsembl.txt') as fin:
+        for line in fin:
+            lst=line.rstrip().split('\t')
+            aa[lst[0]]=lst[1]
 
 symbol={}
 desc={}
-i=0
-if os.path.exists('refLink.txt'):
-    '''
-    0 symbol
-    1 desc
-    2 name
-    3 name
-    '''
-    with open('refLink.txt') as fin:
+if os.path.exists('kgXref.txt'):
+    with open('kgXref.txt') as fin:
         for line in fin:
             lst=line.rstrip().split('\t')
-            if len(lst)<4: continue
-            w=lst[1].replace('"','')
-            #w=w.replace("'",'')
-            desc[lst[2]]=w
-            desc[lst[3]]=w
-            symbol[lst[2]]=lst[0]
-            symbol[lst[3]]=lst[0]
-            i+=1
-#print 'refLink: '+str(i)
+            if lst[0] in aa:
+                ens=aa[lst[0]]
+                if len(lst[4])>0:
+                    symbol[ens]=lst[4]
+                if len(lst[7])>0:
+                    desc[ens]=lst[7]
 
-#use refFlat is refLink not exists
+
+ucsc,tkname=sys.argv[1:]
+
 
 
 # dump
@@ -72,10 +69,6 @@ with open(ucsc) as fin:
         if name in symbol:
             fout.write('name2:"'+symbol[name]+'"')
             fout2.write('{0}\t{1}\t{2}\t{3}\n'.format(g['chrom'],g['start'],g['stop'],symbol[name]))
-        elif not lst[0].isdigit():
-            name2 = lst[0]
-            fout2.write('{0}\t{1}\t{2}\t{3}\n'.format(g['chrom'],g['start'],g['stop'],name2))
-            fout.write('name2:"'+name2+'"')
         fout.write('\n')
         fout2.write('{0}\t{1}\t{2}\t{3}\n'.format(g['chrom'],g['start'],g['stop'],name))
 
